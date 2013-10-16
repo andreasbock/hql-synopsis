@@ -38,69 +38,69 @@ Sinan Gabel, sinan.gabel@gmail.com
 
 \end{abstract}
 
+\section*{Introduction}
+Our \href{http://hiperfit.dk/studentproject_haskell_library_finance.html}{project}, proposed by the HIPERFIT research center, 
+focus on building a modular Haskell library for quantitative finance.
+The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
 \section*{Problem Statement}
-
-Our \href{http://hiperfit.dk/studentproject_haskell_library_finance.html}{project}, proposed by the HIPERFIT research center, will construct the core
-of a modular Haskell library for quantitative finance.
-The main focus is to work on code structure and code architecture to reach a proof-of-concept level.
-
+An existing library written in Mathematica by Sinan Gabel, called DerivativesExpert, has reach a level where it's obsolete.
+Things has changed and new requirements and technologies are pushing the needs of a redesign in a more open language.
+Also, insights into source code and the details behind an implementation is something the market asks for. 
+The recent financial crisis has also emphasized the this need. Software errors and bugs will not be a valid excuse in the future.
 \section*{Elaboration}
 
-% Description of the domain, used to be in the abstract
+A functional language such as Haskell has many attractive properties that
+makes it a perfect fit for finance. For example, Haskell is a functional language.
+This means that functions are first class citizens, and programs are constructed
+from functions entirely. Because of the mathematical nature of finance, a functional
+language preferable and makes it easier to write and test mathematical expressions.
+Further, Haskell is a strongly typed language with type inference. On other words, 
+types makes up a large portion of the language design. A strongly typed language has the
+advantage to finding many bugs at compile time, if used appropriately. These features, together
+with Haskells performance makes it a good candidate for the domain.\\
+
 In finance, a portfolio is a collection of assets such as equity, bonds or other
 types of cash flows. The present value of such a collection can be computed through
 discounting to reflect the value they would have if they existed today, allowing
 investors to evaluate if their resources could yield higher returns elsewhere.
 Financial instruments are priced differently, some using closed-form functions and
-others relying on stochastic simulation.\\
+others relying on stochastic simulation. In this project, we'll mainly work with bonds and
+time value of money.\\
 
-% Motivation for our project
-    % Recent changes in the financial industry
-    % Why a functional language is a suitable choice
-
-The recent financial crisis has emphasized the need ...\\ % Currently reading articles to substantiate these claims (check HIPERFIT publications)
-
-A functional language such as Haskell has a number of attractive properties that
-makes it suitable for the financial domain.\\ % Develop this
-
-% Elaboration of the project description
-    % Exploit Haskell type-system to produce fail-safe code (at least at runtime)
-    % Extendability -> focus on making clever classes and types 
-    % Parallelism -> doesn't seem to be _that_ important, but it's nice to keep in mind
-    % Extendability -> focus on making clever classes and types 
-
-We plan on designing the architecture for a Haskell library for quantitative finance.
-Our focus will be on exploring how Haskell's advanced type system can be exploited
-to ensure safe and correct code.
-We will also explore the possibility of incorporating parallelism to cater for the
+Our focus will be on exploring how Haskell's advanced language features can be used
+to ensure safe and correct code, without compromising a good software architecture.
+We'll make the library extendable for parallel computations to cater for the
 demands that the industry has on performance.\\
 
 % Mathematica "port"
-Finally, library will be heavily inspired by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.
+Finally, the library will be heavily influenced by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.
 
 \section*{Learning Goals}
 
-The project will teach the students the following:
+Learning goals and objectives:
 
 \begin{enumerate}
 \item The student will be able to design and implement medium to large scale software systems in a functional language. % arch
 \item The student will be able to identify and use features of a functional language to enforce the necessary correctness needed in financial computing. % correctness
 \item The students will be able to describe the concepts of financial valuation and its relevance to portfolio management. % finance
 \item The students will be able to develop a sustainable and extendable prototype Haskell library for pricing common financial products. % concrete result
+\item The student will be able to read existing code, used in production, and make suggestions for improvements.
 \end{enumerate}
 
 \section*{Limitations}
 
 % 1) Not a fully-fledged library like DE or Quantlib
-Firstly, we will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
+%Firstly, we will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
 
 % 2) Benchmarking or comparisons (?)
-Secondly, and partly due to the point above, we will not perform an in-depth survey
-comparing the result of our project with similar ones such as the aforemetioned libraries.
+%Secondly, and partly due to the point above, we will not perform an in-depth survey
+%omparing the result of our project with similar ones such as the aforemetioned libraries.
 
 % 3)
 
 % 4)
+This project is mainly limited by time, which is a constraint derived from the course format in which the projects is held. Further, the project is somewhat limited to the existing
+code and requirements encapsulated in DerivativesExpert. The scope has been narrowed to fit the size of the project, and will mainly include pricing functionality for bonds.
 
 \section*{Possible additions}
 

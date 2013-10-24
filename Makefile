@@ -1,5 +1,7 @@
 filename=hql_synopsis
 
+bib:
+	bibtex ${filename}
 pdf: ps
 	ps2pdf ${filename}.ps
 

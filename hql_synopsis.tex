@@ -39,25 +39,23 @@ Sinan Gabel, sinan.gabel@gmail.com
 \end{abstract}
 
 \section*{Introduction}
-Our \href{http://hiperfit.dk/studentproject_haskell_library_finance.html}{project}, proposed by the HIPERFIT research center, 
-focus on building a modular Haskell library for quantitative finance.
-The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
-\section*{Problem Statement}
-An existing library written in Mathematica by Sinan Gabel, called DerivativesExpert, has reach a level where it's obsolete.
-Things has changed and new requirements and technologies are pushing the needs of a redesign in a more open language.
-Also, insights into source code and the details behind an implementation is something the market asks for. 
-The recent financial crisis has also emphasized the this need. Software errors and bugs will not be a valid excuse in the future.
-\section*{Elaboration}
 
-A functional language such as Haskell has many attractive properties that
-makes it a perfect fit for finance. For example, Haskell is a functional language.
-This means that functions are first class citizens, and programs are constructed
-from functions entirely. Because of the mathematical nature of finance, a functional
-language preferable and makes it easier to write and test mathematical expressions.
-Further, Haskell is a strongly typed language with type inference. On other words, 
-types makes up a large portion of the language design. A strongly typed language has the
-advantage to finding many bugs at compile time, if used appropriately. These features, together
-with Haskells performance makes it a good candidate for the domain.\\
+Things has changed and new requirements and
+technologies are pushing the needs of a redesign in a more open language. Also,
+insights into source code and the details behind an implementation is something
+the market asks for. The recent financial crisis has also emphasized the
+this need. Software errors and
+bugs will not be a valid excuse in the future.
+
+\section*{Problem Statement}
+
+In this project we will design the software architecture for a Haskell library for quantitative finance.
+The desired functionality is defined by the existing Mathematica library {\tt DerivativesExpert}, which
+we will re-engineer into Haskell.
+The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
+The project is to be completed within the HIPERFIT research center.
+
+\section*{Elaboration}
 
 In finance, a portfolio is a collection of assets such as equity, bonds or other
 types of cash flows. The present value of such a collection can be computed through
@@ -67,13 +65,36 @@ Financial instruments are priced differently, some using closed-form functions a
 others relying on stochastic simulation. In this project, we'll mainly work with bonds and
 time value of money.\\
 
-Our focus will be on exploring how Haskell's advanced language features can be used
+Functional languages lend themselves well to the domain of finance due
+to several reasons. Firstly, functions are first-class citizens, and programs are constructed
+from functions entirely. Because of the mathematical nature of finance, a functional
+language preferable and makes it easier to write and test mathematical expressions.\\
+
+Secondly, Haskell is a pure language meaning that a function will always return the same value
+if given the same input\footnote{with exceptions such as {\tt IO}}. This makes it ideal for
+financial computations where we want to be certain no our computations are not changed by some
+global state.\\
+
+%A functional language such as Haskell has many attractive properties that
+%makes it a perfect fit for finance. This means that functions are first class citizens,
+%and programs are constructed from functions entirely. Because of the mathematical nature of finance, a functional
+%language preferable and makes it easier to write and test mathematical expressions.
+
+Thirdly, Haskell is a strongly typed language with type inference. In other words, 
+types and type classes make up a large portion of the language design. A strongly typed language has the
+advantage of finding many bugs at compile time (rephrase?), and the class system enables us to overload
+functionality in our programs based on our types. This is a very desirable feature, as we want our financial products
+to share the same interface (e.g. computing present value, expiration date) but with slightly different implementations.\\
+
+Finally, functional languages can easily preserve the inherent parallelism of computations 
+making them ideal for performance-critical tasks such as pricing financial products or
+computing risk.\\
+
+In summary, our focus will be on exploring how Haskell's advanced language features can be used
 to ensure safe and correct code, without compromising a good software architecture.
-We'll make the library extendable for parallel computations to cater for the
-demands that the industry has on performance.\\
 
 % Mathematica "port"
-Finally, the library will be heavily influenced by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.
+%Finally, the library will be heavily influenced by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.
 
 \section*{Learning Goals}
 
@@ -84,23 +105,23 @@ Learning goals and objectives:
 \item The student will be able to identify and use features of a functional language to enforce the necessary correctness needed in financial computing. % correctness
 \item The students will be able to describe the concepts of financial valuation and its relevance to portfolio management. % finance
 \item The students will be able to develop a sustainable and extendable prototype Haskell library for pricing common financial products. % concrete result
-\item The student will be able to read existing code, used in production, and make suggestions for improvements.
+\item To translate the functionality of existing software and re-engineer it in a functional language.
 \end{enumerate}
 
 \section*{Limitations}
 
 % 1) Not a fully-fledged library like DE or Quantlib
-%Firstly, we will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
+Firstly, we will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
 
 % 2) Benchmarking or comparisons (?)
-%Secondly, and partly due to the point above, we will not perform an in-depth survey
-%omparing the result of our project with similar ones such as the aforemetioned libraries.
+Secondly, and partly due to the point above, we will not perform an in-depth survey
+omparing the result of our project with similar ones such as the aforemetioned libraries.
 
 % 3)
 
-% 4)
-This project is mainly limited by time, which is a constraint derived from the course format in which the projects is held. Further, the project is somewhat limited to the existing
-code and requirements encapsulated in DerivativesExpert. The scope has been narrowed to fit the size of the project, and will mainly include pricing functionality for bonds.
+This project is mainly limited by time, which is a constraint derived from the course format in which the projects is held.
+Further, the project is somewhat limited to the existing code and requirements encapsulated in DerivativesExpert.
+The scope has been narrowed to fit the size of the project, and will mainly include pricing functionality for bonds.
 
 \section*{Possible additions}
 

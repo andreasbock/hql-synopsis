@@ -43,23 +43,22 @@ Sinan Gabel, sinan.gabel@gmail.com
 Things has changed and new requirements and
 technologies are pushing the needs of a redesign in a more open language. Also,
 insights into source code and the details behind an implementation is something
-the market asks for. The recent financial crisis has also emphasized the
-this need. Software errors and
+the market asks for. The recent financial crisis has also emphasized the need. Software errors and
 bugs will not be a valid excuse in the future.
 
 \section*{Problem Statement}
 
 In this project we will design the software architecture for a Haskell library for quantitative finance.
-The desired functionality is defined by the existing Mathematica library {\tt DerivativesExpert}, which
+The desired functionality is defined by an existing Mathematica library {\tt DerivativesExpert}, which
 we will re-engineer into Haskell.
 The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
 The project is to be completed within the HIPERFIT research center.
 
 \section*{Elaboration}
 
-In finance, a portfolio is a collection of assets such as equity, bonds or other
+In finance, a portfolio is a collection of assets such as equities, bonds and other
 types of cash flows. The present value of such a collection can be computed through
-discounting to reflect the value they would have if they existed today, allowing
+discounting to reflect the theoretical value they would have if they existed today. This allows
 investors to evaluate if their resources could yield higher returns elsewhere.
 Financial instruments are priced differently, some using closed-form functions and
 others relying on stochastic simulation. In this project, we'll mainly work with bonds and
@@ -70,9 +69,9 @@ to several reasons. Firstly, functions are first-class citizens, and programs ar
 from functions entirely. Because of the mathematical nature of finance, a functional
 language preferable and makes it easier to write and test mathematical expressions.\\
 
-Secondly, Haskell is a pure language meaning that a function will always return the same value
+Haskell is a pure language meaning that a function will always return the same value
 if given the same input\footnote{with exceptions such as {\tt IO}}. This makes it ideal for
-financial computations where we want to be certain no our computations are not changed by some
+financial computations where we want to be certain our computations are not changed by some
 global state.\\
 
 %A functional language such as Haskell has many attractive properties that
@@ -80,7 +79,7 @@ global state.\\
 %and programs are constructed from functions entirely. Because of the mathematical nature of finance, a functional
 %language preferable and makes it easier to write and test mathematical expressions.
 
-Thirdly, Haskell is a strongly typed language with type inference. In other words, 
+Additionally, Haskell is a strongly typed language with type inference. In other words, 
 types and type classes make up a large portion of the language design. A strongly typed language has the
 advantage of finding many bugs at compile time (rephrase?), and the class system enables us to overload
 functionality in our programs based on our types. This is a very desirable feature, as we want our financial products
@@ -91,7 +90,7 @@ making them ideal for performance-critical tasks such as pricing financial produ
 computing risk.\\
 
 In summary, our focus will be on exploring how Haskell's advanced language features can be used
-to ensure safe and correct code, without compromising a good software architecture.
+to ensure safe and correct code, without compromising a good extendable software architecture.
 
 % Mathematica "port"
 %Finally, the library will be heavily influenced by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.

@@ -56,7 +56,7 @@ colocated machines that perform high-frequency trading.
 These tools may help increase competitiveness and profits, but emphasize the
 importance of correct code.
 
-Automated algorithmic trading systems have low operational risk due to the lack
+Automated algorithmic trading systems are considered to have lower operational risk due to the lack
 of human contact, but require software correctness to work. An otherwise feasible
 trading model to wreak havoc on markets because of a software error.
 
@@ -80,15 +80,15 @@ of the unnecessary risk in financial modelling.
 \section*{Problem Statement}
 
 In this project we will design the software architecture for a Haskell library for quantitative finance.
-The desired functionality is defined by an existing Mathematica library {\tt DerivativesExpert}, which
+The desired functionality is modeled after an existing Mathematica library {\tt DerivativesExpert}, which
 we will re-engineer into Haskell.
 The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
 The project is to be completed within the HIPERFIT research center.
 
 \section*{Elaboration}
 
-In finance, a portfolio is a collection of assets such as equities, bonds and other
-types of cash flows. The present value of such a collection can be computed through
+In finance, a portfolio is a number of positions such as positions in equities, bonds and other
+types of financial instruments. The present value of such a collection can be computed through
 discounting to reflect the theoretical value they would have if they existed today. This allows
 investors to evaluate if their resources could yield higher returns elsewhere.
 Financial instruments are priced differently, some using closed-form functions and
@@ -110,9 +110,9 @@ global state.\\
 %and programs are constructed from functions entirely. Because of the mathematical nature of finance, a functional
 %language preferable and makes it easier to write and test mathematical expressions.
 
-Additionally, Haskell is a strongly typed language with type inference. In other words, 
-types and type classes make up a large portion of the language design. A strongly typed language has the
-advantage of finding many bugs at compile time (rephrase?), and the class system enables us to overload
+Additionally, Haskell is a static typed language with type inference. In other words, 
+types and type classes make up a large portion of the language design. Static typed languages have the
+advantage of discovering many errors at compile time (rephrase?), and the type class system enables us to overload
 functionality in our programs based on our types. This is a very desirable feature, as we want our financial products
 to share the same interface (e.g. computing present value, expiration date) but with slightly different implementations.\\
 
@@ -132,7 +132,7 @@ Learning goals and objectives:
 
 \begin{enumerate}
 \item The student will be able to design and implement medium to large scale software systems in a functional language. % arch
-\item The student will be able to identify and use features of a functional language to enforce the necessary correctness needed in financial computing. % correctness
+%\item The student will be able to identify and use features of a functional language to enforce the necessary correctness needed in financial computing. % correctness
 \item The students will be able to describe the concepts of financial valuation and its relevance to portfolio management. % finance
 \item The students will be able to develop a sustainable and extendable prototype Haskell library for pricing common financial products. % concrete result
 \item To translate the functionality of existing software and re-engineer it in a functional language.
@@ -157,11 +157,13 @@ pricing functionality for bonds specified in the {\tt DerivativesExpert} package
 
 \section*{Schedule}
 
+%% Use milestones here instead?
+
 Below is our approximate schedule over the course of the project:\\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[scale=0.275]{schedule.png}
+%\includegraphics[bb = 0 0 1302 348, scale=0.275]{schedule.png}
 \end{center}
 \end{figure}
 

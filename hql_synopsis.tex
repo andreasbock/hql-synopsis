@@ -18,13 +18,21 @@ Sinan Gabel, sinan.gabel@gmail.com
 \usepackage{graphicx}
 \usepackage{moreverb}
 \usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
 
 %---- settings ----
 \topmargin=-1.1in % start text higher on page
 \textheight=695pt
 \usepackage[T1]{fontenc} % font
-%\renewcommand*{\familydefault}{\sfdefault}
 \setlength{\parindent}{0in}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+
+\newenvironment{filecode}[1][]
+{\minipage{\linewidth}
+\lstset{basicstyle=\ttfamily\footnotesize,frame=single,
+numberstyle=\small\color{black},keywordstyle=\color{black},commentstyle=\color{black},stringstyle=\color{black},tabsize=2,backgroundcolor=\color{lightgray},language=Haskell,#1}}
+{\endminipage}
 %-------------------
 
 \begin{document}
@@ -83,10 +91,11 @@ In this project we will design the software architecture for a Haskell library f
 The desired functionality is modeled after an existing Mathematica library {\tt DerivativesExpert}, which
 we will re-engineer into Haskell.
 The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
-The project is to be completed within the HIPERFIT research center.
+The project is limited to research within the HIPERFIT research center.
 
 \section*{Elaboration}
 
+% TODO Mention Quantlib
 In finance, a portfolio is a number of positions such as positions in equities, bonds and other
 types of financial instruments. The present value of such a collection can be computed through
 discounting to reflect the theoretical value they would have if they existed today. This allows
@@ -110,11 +119,18 @@ global state.\\
 %and programs are constructed from functions entirely. Because of the mathematical nature of finance, a functional
 %language preferable and makes it easier to write and test mathematical expressions.
 
-Additionally, Haskell is a static typed language with type inference. In other words, 
-types and type classes make up a large portion of the language design. Static typed languages have the
-advantage of discovering many errors at compile time (rephrase?), and the type class system enables us to overload
+Additionally, Haskell is a statically typed language with type inference. As such, 
+types and type classes make up a large portion of the language design. Statically typed languages have the
+advantage of discovering many errors at compile time, and the type class system enables us to overload
 functionality in our programs based on our types. This is a very desirable feature, as we want our financial products
 to share the same interface (e.g. computing present value, expiration date) but with slightly different implementations.\\
+
+A proof-of-concept example of the inheritance relation that we want our library
+to feature is shown in listing \ref{lst:inh}.
+
+\begin{filecode}[caption=Inheritance relations using type classes, label={lst:inh}]
+\lstinputlisting{Example.hs}
+\end{filecode}\\
 
 Finally, functional languages can easily preserve the inherent parallelism of computations 
 making them ideal for performance-critical tasks such as pricing financial products or

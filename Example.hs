@@ -26,9 +26,9 @@ class Instrument b => Bond b where
   principal :: b -> Payment
   coupon    :: b -> Payment
   maturity  :: b -> Date
-  ytm :: b -> Payment
-  duration :: b -> Payment
-  discount :: b -> DiscountFunction
+  ytm       :: b -> Payment
+  duration  :: b -> Payment
+  discount  :: b -> DiscountFunction
   ... 
 
 class Instrument d => Derivative d where

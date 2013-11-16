@@ -86,7 +86,7 @@ of the unnecessary risk in financial modelling.
 
 In this project we will design the software architecture for a Haskell library for quantitative finance.
 The desired functionality is modeled after an existing Mathematica library {\tt DerivativesExpert}, which
-we will re-engineer into Haskell.
+we will re-engineer using Haskell.
 The main objective is to use the Haskell programming language for design and architecture and reach a proof-of-concept level.
 The project is conducted within the HIPERFIT research center.
 
@@ -124,14 +124,61 @@ advantage of discovering many errors at compile time, and the type class system 
 functionality in our programs based on our types.
 This is a very desirable feature, as we want our financial
 products to have the same API (e.g. a function \texttt{presentValue} should return the
-present value regardless of the product type).
+present value regardless of the product type).\\
 
-A proof-of-concept example of the inheritance relation that we want our library
-to feature is shown in listing \ref{lst:inh}.
+We will now exemplify our use of Haskell's type system in modelling financial contracts.
+As a starting point we ask ourselves what functionality we wish to have when we modelling
+any financial instrument.
+Haskell's type classes can be used to define interfaces for our financial products:
 
-\begin{filecode}[caption=Inheritance relations using type classes, label={lst:inh}]
-\lstinputlisting{Example.hs}
-\end{filecode}\\
+\begin{center}
+\tt
+\begin{tabular}{lll}
+class & Instrument i where\\
+      &\hspace{-1cm} pv       :: i -> DiscountFunction -> Payment\\
+      &\hspace{-1cm} cashflow :: i -> CashFlow\\
+\end{tabular}
+\end{center}
+
+such that instances of {\tt Instrument} must implement {\tt pv} and {\tt cashflow}, each
+computing the present value and cash flow (series of future payments) respectively.
+
+Now turning to specific instruments, a common bond can be represented as by a
+Haskell data type:
+
+\begin{center}
+\tt
+\begin{tabular}{lll}
+data & CommonBond = CommonBond \{\\
+      &\hspace{-1cm} principal :: Payment,\\
+      &\hspace{-1cm} ts :: TermStructure\\
+      &\hspace{-1cm}\}
+\end{tabular}
+\end{center}
+
+As a {\tt CommonBond} is indeed a finanicial instrument we may make it an instance of
+the {\tt Instrument} class and define its functions based on appropriate mathematical
+formulas.
+
+Haskell's type hierarchy allows us to define a new type class that more precisely
+defines the desired interface for bonds:
+
+\begin{center}
+\tt
+\begin{tabular}{lll}
+class & Instrument b => Bond b where\\
+      &\hspace{-1cm} principal :: b -> Payment\\
+      &\hspace{-1cm} coupon    :: b -> Payment\\
+      &\hspace{-1cm} maturity  :: b -> Date\\
+      &\hspace{-1cm} discount  :: b -> DiscountFunction\\
+      ...
+\end{tabular}
+\end{center}
+
+We may continue to define new classes in this manner, forming a tree-like
+structure of the classes. We seek to identify this inheritance relations among
+financial products and model them in Haskell through the hierarchical structure
+of the class system.\\
 
 Finally, functional languages can easily preserve the inherent parallelism of computations 
 making them ideal for performance-critical tasks such as pricing financial products or
@@ -140,16 +187,12 @@ computing risk.\\
 In summary, our focus will be on exploring how Haskell's language features can be used
 to ensure safe and correct code, without compromising a good extendable software architecture.
 
-% Mathematica "port"
-%Finally, the library will be heavily influenced by the {\tt DerivativesExpert} package developed by Sinan Gabel for the \emph{Mathematica} software\cite{Mathematica:DerivativesExpert}.
-
 \section*{Learning Goals}
 
 Learning goals and objectives:
 
 \begin{enumerate}
 \item The student will be able to design and implement medium to large scale software systems in a functional language. % arch
-%\item The student will be able to identify and use features of a functional language to enforce the necessary correctness needed in financial computing. % correctness
 \item The students will be able to describe the concepts of financial valuation and its relevance to portfolio management. % finance
 \item The students will be able to develop a sustainable and extendable prototype Haskell library for pricing common financial products. % concrete result
 \item To translate the functionality of existing software and re-engineer it in a functional language.
@@ -158,7 +201,7 @@ Learning goals and objectives:
 \section*{Limitations}
 
 % 1) Not a fully-fledged library like DE or Quantlib
-Firstly, we will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
+We will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
 % 2) Benchmarking or comparisons (?)
 Secondly, and partly due to the point above, we will not perform an in-depth survey
 comparing the result of our project with similar ones such as the aforemetioned libraries.
@@ -172,7 +215,7 @@ pricing functionality for different bond types specified in the {\tt Derivatives
 
 \section*{Possible additions}
 
-Firstly, there are a number of day count conventions in the financial world, so a
+There are a number of day count conventions in the financial world, so a
 calendar library that supports these peculiarities would be valuable for the precision
 of our pricing methods.\\
 

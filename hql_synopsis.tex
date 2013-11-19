@@ -61,11 +61,27 @@ software may have dire consequences in the form of massive monetary loss.
 Human brokers are replaced by computer systems, and traders are now joined by
 colocated machines that perform high-frequency trading using predefined and backtested algorithms.\\
 
+Backtesting is a method where historical data is used to evaluate the performance of said
+trading algorithm. This includes computing the present value of a portfolio to assess whether
+the trader's funds could be utilized more efficiently elsewhere.
+However, an otherwise feasible trading model could wreak havoc on markets because of a software error
+which stresses the need for code correctness for both the algorithms and our assesment of them.\\
 
-What if, many of the errors in software could be discovered by the compiler through clever\ab{Paragraphs don't link together, also casting has no meaning in Haskell}
+A language that, by design, allows us to discover a large portion of software errors in 
+the compilation phase is therefore preferable in the financial domain. 
+
+Our project will deliver a proof of concept library for pricing financial contracts.
+We will implement it using the pure functional programming language Haskell which features
+many attractive properties that steer us toward producing safe and correct code.\\
+
+By designing and building our software using Haskell, we hope to eliminate some
+of the unnecessary risk in financial modelling and this project will investigate these possibilities.\\
+
+\begin{comment}
+What if, many of the errors in software could be discovered by the compiler through clever
 usage of types and much stricter rules for conversion of such using casting. We will
 try to reach a proof of concept level using a pure functional programming language called Haskell \cite{Haskell},
- where many desirable constructs for building robust and safe software is implemented.\\ \ab{I have a branch called rc2 where I have elaborated. In my opinion this is too short to give meaning}. 
+ where many desirable constructs for building robust and safe software is implemented.\\
 
 By designing and building our software using Haskell, we hope to eliminate some
 of the unnecessary risk in financial modelling, and this project will investigate these possibilities.\\
@@ -73,7 +89,6 @@ of the unnecessary risk in financial modelling, and this project will investigat
 %Backtesting is a method used for testing trading algorithms on historical data
 %to be able to evaluate their performance in terms of returns, volatility etc.
 
-\begin{comment}
 % Algorithms
 These tools may help increase competitiveness and profits in unexploited areas, but emphasize the
 importance of correct and efficient code.
@@ -95,11 +110,7 @@ the world's economies.
 Consequently, financial institutions' risk management tools must become more
 sophisticated, putting stress on the quality of the software.
 
-
-
-\end{comment}
-
-The library is intended to be used for the following purposes: \ab{This is problem statement/learning goals, I do no think this should be included}
+The library is intended to be used for the following purposes:\ab{This shouldn't be included, this is the learning goals/problem statement}.
 \begin{itemize}
 \item Numerical valuation of financial contracts with closed-form solutions
 \item Simulations and backtesting
@@ -107,6 +118,7 @@ The library is intended to be used for the following purposes: \ab{This is probl
 \item Research and education
 \end{itemize}
 
+\end{comment}
 
 \section*{Problem Statement}
 
@@ -133,10 +145,10 @@ from functions entirely. Because of the mathematical nature of finance, a functi
 programming language is preferable and makes it easier to write and test mathematical expressions.\\
 
 Further, Haskell is a pure language meaning that a function will always return the same value
-if given the same input\footnote{with exceptions such as {\tt I/O}}. This makes it ideal for
+if given the same input. This makes it ideal for
 financial computations where we want to be certain our computations are not changed by some
 global state. In Haskell, the programmer is always aware of whether the constructs used will affect
-state or note, because of the clear distinction made between pure functions and  monads that induce state (the \texttt{I/O} monad).\\
+state or note, because of the clear distinction made between pure functions and  monads that induce state \footnote{the \texttt{I/O} monad}.\\
 
 Combining Haskell's purity with its modularity, we can also allow for users to `glue`
 together functions without the worry that, for instance, the first function call has changed
@@ -153,8 +165,8 @@ products to have the same API (e.g. a function \texttt{presentValue} should retu
 present value regardless of the product type).\\
 
 %% More technical details
-As part of the input to the project, we have access to existing test-cases written in Mathematica code.
-These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.\ab{This is not relevant? Also, we do not know if we have time for this.} 
+%As part of the input to the project, we have access to existing test-cases written in Mathematica code.
+%These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
 
 We will now exemplify our use of Haskell's type system in modelling financial contracts.
 As a starting point we ask ourselves what functionality we wish to have when we modelling
@@ -249,8 +261,12 @@ There are a number of day count conventions in the financial world, so a
 calendar library that supports these peculiarities would be valuable for the precision
 of our pricing methods.\\
 
-A natural development of the project is to introduce a combinator library for composing contracts\ab{wouldn't this depend on our architecture whether it is feasible to do? Is it?}
-from atomic constructs, as proposed by Peyton Jones et al. \cite{Pjes2000}.\\
+% More technical details
+%Another possible addition would be to port the have access to existing test-cases written in Mathematica code.
+%These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
+
+A natural development of the project is to introduce a combinator library for composing contracts
+from atomic constructs, as proposed by Peyton Jones et al. \cite{Pjes2000}.\\ \ab{This needs to be elaborated}\\
 
 Another possible addition to the library could be a domain-specific language (DSL) for modelling \emph{over-the-counter} (OTC) contracts, i.e. where two parties agree to trade a product given some conditions outside regular exchanges.
 

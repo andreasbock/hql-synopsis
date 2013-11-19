@@ -61,11 +61,13 @@ software may have dire consequences in the form of massive monetary loss.
 Human brokers are replaced by computer systems, and traders are now joined by
 colocated machines that perform high-frequency trading using predefined and backtested algorithms.\\
 
+\begin{comment}
 Backtesting is a method where historical data is used to evaluate the performance of said
 trading algorithm. This includes computing the present value of a portfolio to assess whether
 the trader's funds could be utilized more efficiently elsewhere.
 However, an otherwise feasible trading model could wreak havoc on markets because of a software error
 which stresses the need for code correctness for both the algorithms and our assesment of them.\\
+\end{comment}
 
 A language that, by design, allows us to discover a large portion of software errors in 
 the compilation phase is therefore preferable in the financial domain. 
@@ -73,6 +75,15 @@ the compilation phase is therefore preferable in the financial domain.
 Our project will deliver a proof of concept library for pricing financial contracts.
 We will implement it using the pure functional programming language Haskell which features
 many attractive properties that steer us toward producing safe and correct code.\\
+
+The library is intended to be used for the following purposes:
+%\ab{This shouldn't be included, this is the learning goals/problem statement}.
+\begin{itemize}
+\item Numerical valuation of financial contracts with closed-form solutions
+\item Simulations and backtesting
+\item Explore and develop new contract types from existing ones
+\item Research and education
+\end{itemize}
 
 By designing and building our software using Haskell, we hope to eliminate some
 of the unnecessary risk in financial modelling and this project will investigate these possibilities.\\
@@ -185,7 +196,7 @@ class & Instrument i where\\
 such that instances of {\tt Instrument} must implement {\tt pv} and {\tt cashflow}, each
 computing the present value and cash flow (series of future payments) respectively.
 
-Now turning to specific instruments, a common bond can be represented as by a
+Now turning to specific instruments, a common bond can be represented by a
 Haskell data type:
 
 \begin{center}
@@ -248,12 +259,18 @@ We will not expect to produce a fully-fledged library like {\tt DerivativesExper
 Secondly, and partly due to the point above, we will not perform an in-depth survey
 comparing the result of our project with similar ones such as the aforemetioned libraries.
 
+The lack of a symbolic computation engine in our project, which is part of Mathematica, may limit us
+in terms of flaoting point precision. If this has any practical significance remains to be evaluated.
+
 % 3)
 
 The project is mainly limited by time, a constraint derived from the project course 
 format (one block lasting approximately 9 weeks).
 The scope has been narrowed to fit the size of the project, and will mainly include
 pricing functionality for different bond types specified in the {\tt DerivativesExpert} package.
+
+
+
 
 \section*{Possible additions}
 

@@ -254,7 +254,8 @@ and the time value of money.\\
 
 % Modularity
 A functional language like Haskell lends itself well to the domain of finance as its
-modularity permits us to easily `glue` computations together while non-strictness
+modularity permits us to easily `glue` pure\footnote{A \emph{pure} computation does not
+affect global state.} computations together while non-strictness
 will prevent us from incurring enormous performance penalties\cite{hughes:matters-cj}.
 An an example could be that we wish to compute the yield of a set of bonds
 over the two coming years, given that the bonds reach maturity in ten years.

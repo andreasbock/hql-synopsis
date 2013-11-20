@@ -58,14 +58,17 @@ numberstyle=\small\color{black},keywordstyle=\color{black},commentstyle=\color{b
 Our everyday lives becoming increasingly dependent on IT, and as a result, software
 errors are manifold. The financial sector has a particular low tolerance, as erroneous
 software may have dire consequences in the form of massive monetary loss.
+
 Human brokers are replaced by computer systems, and traders are now joined by
 colocated machines that perform high-frequency trading using predefined and backtested algorithms.\\
 
-Backtesting is a method where historical data is used to evaluate the performance of said
-trading algorithm. This includes computing the present value of a portfolio to assess whether
-the trader's funds could be utilized more efficiently elsewhere.
-However, an otherwise feasible trading model could wreak havoc on markets because of a software error
-which stresses the need for code correctness for both the algorithms and our assesment of them.\\
+%Predefined and backtested trading algorithms are being used as a measure
+%to lowering operational risk due as a result of human error, but can be exposed to flaws in software.\\
+
+Backtesting is a method where historical data is used to evaluate the
+performance of said trading algorithm. However, an otherwise feasible trading
+model could wreak havoc on markets because of a software error, which stresses
+the need for code correctness for both the algorithms and our assesment of them.\\
 
 A language that, by design, allows us to discover a large portion of software errors in 
 the compilation phase is therefore preferable in the financial domain. 
@@ -130,16 +133,24 @@ The project is conducted within the HIPERFIT research center.
 
 \section*{Elaboration}
 
-% TODO Mention Quantlib
-In finance, a portfolio is a number of positions such as long or short trades in equities, bonds and other
-types of financial instruments. The present value of such a collection can be computed through
-discounting to reflect the theoretical value they would have if they existed today. This allows
+In finance, a portfolio is a number of positions such as long or short trades
+in equities, bonds and other types of financial instruments. The present value
+of such a collection can be computed through discounting to reflect the
+value they would have if they existed today. This allows
 investors to evaluate if their resources could yield higher returns elsewhere.
-Financial instruments are priced differently, some using closed-form functions and
-others relying on stochastic simulation. In this project, we'll mainly work with closed-form functions for bonds and
-the time value of money.\\
+In this project, we will mainly work with closed-form functions for bonds
+and the time value of money.\\
 
-Functional languages lend themselves well to the domain of finance due
+% Modularity
+A functional language like Haskell lends itself well to the domain of finance as its
+modularity permits us to easily `glue` computations together while non-strictness
+will prevent us from enormous performance penalties\cite{hughes:matters-cj},
+
+Moreover, \cite{composingcontracts} presents a combinator library for describing
+financial contracts to further emphasize the possibilities.
+
+% purity
+\begin{comment}
 to several reasons. Firstly, functions are first-class citizens, and programs are constructed
 from functions entirely. Because of the mathematical nature of finance, a functional
 programming language is preferable and makes it easier to write and test mathematical expressions.\\
@@ -149,6 +160,8 @@ if given the same input. This makes it ideal for
 financial computations where we want to be certain our computations are not changed by some
 global state. In Haskell, the programmer is always aware of whether the constructs used will affect
 state or note, because of the clear distinction made between pure functions and  monads that induce state \footnote{the \texttt{I/O} monad}.\\
+
+%% Modularity
 
 Combining Haskell's purity with its modularity, we can also allow for users to `glue`
 together functions without the worry that, for instance, the first function call has changed
@@ -163,13 +176,14 @@ functionality in our programs based on our types.
 This is a very desirable feature, as we want our financial
 products to have the same API (e.g. a function \texttt{presentValue} should return the
 present value regardless of the product type).\\
+\end{comment}
 
 %% More technical details
 %As part of the input to the project, we have access to existing test-cases written in Mathematica code.
 %These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
 
 We will now exemplify our use of Haskell's type system in modelling financial contracts.
-As a starting point we ask ourselves what functionality we wish to have when we modelling
+As a starting point we describe the functionality we wish to have when we modelling
 any financial instrument.
 Haskell's type classes can be used to define interfaces for our financial products:
 
@@ -186,7 +200,7 @@ such that instances of {\tt Instrument} must implement {\tt pv} and {\tt cashflo
 computing the present value and cash flow (series of future payments) respectively.
 
 Now turning to specific instruments, a common bond can be represented as by a
-Haskell data type:
+Haskell data type containing the principal of the bond :
 
 \begin{center}
 \tt
@@ -220,11 +234,31 @@ class & Instrument b => Bond b where\\
 We may continue to define new classes in this manner, forming a tree-like
 structure of the classes. We seek to identify these inheritance relations among
 financial products and model them in Haskell through the hierarchical structure
-of the class system.\\
+of the class system.
+Haskell's type system ensures us that we will always can never use an incorrect
+function to price a given financial product.\\
 
-Finally, functional languages can easily preserve the inherent parallelism of computations 
-making them ideal for performance-critical tasks such as pricing financial products or
-computing risk.\\
+Furthermore, we can use Haskell's data types to build new financial products, for instance
+a consol bond could be defined using our {\tt CommonBond} from above:
+
+\begin{center}
+\tt
+\begin{tabular}{lll}
+data & Consol = Consol \{\\
+      &\hspace{-1cm} bond   :: CommonBond,\\
+      &\hspace{-1cm} coupon :: Payment\\
+      &\hspace{-1cm}\}
+\end{tabular}
+\end{center}
+
+which we can also make an instance of both {\tt Instrument} and {\tt Bond}.
+As we see, the composite nature of Haskell's algebraic data types to enable new products
+to be created with ease.\\
+
+Finally, functional languages can also easily preserve the inherent parallelism 
+of computations making them ideal for performance-critical tasks such as pricing
+financial products or computing risk. \cite{hiperfit2010}[Section 4] gives an
+overview of the advantages of parallel functional programming.\\
 
 In summary, our focus will be on exploring how Haskell's language features can be used
 to ensure safe and correct code, without compromising a good extendable software architecture.
@@ -265,8 +299,11 @@ of our pricing methods.\\
 %Another possible addition would be to port the have access to existing test-cases written in Mathematica code.
 %These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
 
-A natural development of the project is to introduce a combinator library for composing contracts
-from atomic constructs, as proposed by Peyton Jones et al. \cite{Pjes2000}.\\ \ab{This needs to be elaborated}\\
+Mathematica features a symbolic computation engine for preservation of floating point precision. Haskell
+does not allow for the same symbolic precision and it is out of the scope of this project address this issue.\\
+
+%A natural development of the project is to introduce a combinator library for composing contracts
+%from atomic constructs, as proposed by Peyton Jones et al. \cite{Pjes2000}.\\ \ab{This needs to be elaborated}\\
 
 Another possible addition to the library could be a domain-specific language (DSL) for modelling \emph{over-the-counter} (OTC) contracts, i.e. where two parties agree to trade a product given some conditions outside regular exchanges.
 

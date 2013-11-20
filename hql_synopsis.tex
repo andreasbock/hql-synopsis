@@ -58,8 +58,8 @@ numberstyle=\small\color{black},keywordstyle=\color{black},commentstyle=\color{b
 Our everyday lives becoming increasingly dependent on IT, and as a result, software
 errors are manifold. The financial sector has a particular low tolerance, as erroneous
 software may have dire consequences in the form of massive monetary loss.
-Human brokers are replaced by computer systems, and traders are now joined by
-colocated machines that perform high-frequency trading using predefined and backtested algorithms.\\
+Human brokers are replaced by computer systems, and traders are now joined by\ab{last sentence makes no sense by itself. Next paragraph is something \emph{completely} different}  
+colocated machines that perform high-frequency trading using predefined and backtested algorithms\ab{Removed the part about backtesting, but this was a use-case...}.\\
 
 \begin{comment}
 Backtesting is a method where historical data is used to evaluate the performance of said
@@ -77,7 +77,7 @@ We will implement it using the pure functional programming language Haskell whic
 many attractive properties that steer us toward producing safe and correct code.\\
 
 The library is intended to be used for the following purposes:
-%\ab{This shouldn't be included, this is the learning goals/problem statement}.
+\ab{Again, this shouldn't be included, this is the learning goals/problem statement}.
 \begin{itemize}
 \item Numerical valuation of financial contracts with closed-form solutions
 \item Simulations and backtesting
@@ -147,7 +147,7 @@ types of financial instruments. The present value of such a collection can be co
 discounting to reflect the theoretical value they would have if they existed today. This allows
 investors to evaluate if their resources could yield higher returns elsewhere.
 Financial instruments are priced differently, some using closed-form functions and
-others relying on stochastic simulation. In this project, we'll mainly work with closed-form functions for bonds and
+others relying on stochastic simulation. In this project, we will mainly work with closed-form functions for bonds and
 the time value of money.\\
 
 Functional languages lend themselves well to the domain of finance due
@@ -257,10 +257,15 @@ Learning goals and objectives:
 We will not expect to produce a fully-fledged library like {\tt DerivativesExpert} or Quantlib\cite{Ame2003}.
 % 2) Benchmarking or comparisons (?)
 Secondly, and partly due to the point above, we will not perform an in-depth survey
-comparing the result of our project with similar ones such as the aforemetioned libraries.
+comparing the result of our project with similar ones such as the aforemetioned libraries.\\
 
-The lack of a symbolic computation engine in our project, which is part of Mathematica, may limit us
-in terms of flaoting point precision. If this has any practical significance remains to be evaluated.
+Mathematica features a symbolic computation engine for preservation of floating point precision. Haskell\ab{rephrased this}
+does not allow for the same symbolic precision and it is out of the scope of this project address this issue.\\
+
+%The lack of a symbolic computation engine in our project, which is part of Mathematica, may limit us
+%in terms of floating point precision.
+
+If this has any practical significance remains to be evaluated.\ab{We \emph{know} the consequences}
 
 % 3)
 

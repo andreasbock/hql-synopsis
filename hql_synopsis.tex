@@ -256,7 +256,7 @@ and the time value of money.\\
 A functional language like Haskell lends itself well to the domain of finance as its
 modularity permits us to easily `glue` computations together while non-strictness
 will prevent us from enormous performance penalties\cite{hughes:matters-cj}.\\
-\ab{Need more here before technical stuff?}.
+\ab{Need more here before technical stuff?}
 
 %\cite{composingcontracts} presents a Haskell combinator library for describing a
 %financial contracts to further emphasize the .\\
@@ -324,7 +324,7 @@ Haskell data type:
 data & Zero = Zero \{\\
       &\hspace{-1cm} principal :: Payment,\\
       &\hspace{-1cm} ts :: TermStructure\\
-      &\hspace{-1cm}\}
+      &\hspace{-0.8cm}\}
 \end{tabular}
 \end{center}
 
@@ -363,7 +363,7 @@ a consol bond could be defined using our {\tt Zero} from above:
 data & Consol = Consol \{\\
       &\hspace{-1cm} baseBond :: Zero,\\
       &\hspace{-1cm} coupon   :: Payment\\
-      &\hspace{-1cm}\}
+      &\hspace{-0.8cm}\}
 \end{tabular}
 \end{center}
 

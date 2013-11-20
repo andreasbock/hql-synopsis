@@ -279,7 +279,7 @@ Haskell's type classes can be used to define interfaces for our financial produc
 \tt
 \begin{tabular}{lll}
 class & Instrument i where\\
-      &\hspace{-1cm} pv       :: i -> DiscountFunction -> Payment\\
+      &\hspace{-1cm} pv \hspace{1.18cm}:: i -> DiscountFunction -> Payment\\
       &\hspace{-1cm} cashflow :: i -> CashFlow\\
       &\hspace{-1cm} ...\\
 \end{tabular}
@@ -295,8 +295,8 @@ Haskell data type:
 \tt
 \begin{tabular}{lll}
 data & Zero = Zero \{\\
-      &\hspace{-1cm} principal :: Payment,\\
-      &\hspace{-1cm} ts :: TermStructure\\
+      &\hspace{-1cm} maturity  :: Date,\\
+      &\hspace{-1cm} principal :: Payment\\
       &\hspace{-0.8cm}\}
 \end{tabular}
 \end{center}
@@ -334,8 +334,9 @@ a consol bond could be defined using our {\tt Zero} from above:
 \tt
 \begin{tabular}{lll}
 data & Consol = Consol \{\\
-      &\hspace{-1cm} baseBond :: Zero,\\
-      &\hspace{-1cm} coupon   :: Payment\\
+      &\hspace{-1cm} baseBond    :: Zero,\\
+      &\hspace{-1cm} rate        :: Date,\\
+      &\hspace{-1cm} settlements :: Int\\
       &\hspace{-0.8cm}\}
 \end{tabular}
 \end{center}

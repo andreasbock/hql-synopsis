@@ -153,7 +153,7 @@ state or note, because of the clear distinction made between pure functions and 
 Combining Haskell's purity with its modularity, we can also allow for users to `glue`
 together functions without the worry that, for instance, the first function call has changed
 a value through a pointer. Function composition in this manner does not mean we
-take a penalty performance-wise, since the non-strictness of the language  means that
+take a penalty performance-wise, since the non-strictness of the language means that
 we only evaluate the things we need.\\
 
 Additionally, Haskell is a statically typed language with type inference. As such, 
@@ -218,7 +218,7 @@ class & Instrument b => Bond b where\\
 \end{center}
 
 We may continue to define new classes in this manner, forming a tree-like
-structure of the classes. We seek to identify this inheritance relations among
+structure of the classes. We seek to identify these inheritance relations among
 financial products and model them in Haskell through the hierarchical structure
 of the class system.\\
 

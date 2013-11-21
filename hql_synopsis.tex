@@ -50,7 +50,8 @@ numberstyle=\small\color{black},keywordstyle=\color{black},commentstyle=\color{b
 
 \begin{abstract}
 
-% Something about how pricing is done now, and what we will do
+We present our project where we will design and develop the architecture
+for a Haskell library for pricing financial contracts.
 
 \end{abstract}
 
@@ -90,7 +91,7 @@ The project is conducted within the HIPERFIT research center.
 
 In finance, a portfolio is a number of positions such as long or short trades in equities, bonds and other
 types of financial instruments. The present value of such a collection can be computed through
-discounting to reflect the theoretical value they would have if they existed today, allowing
+discounting to reflect the value they would have if they existed today, allowing
 for comparisons of cashflows. 
 %Financial instruments are priced differently, some using closed-form functions and
 %others relying on simulation. 
@@ -101,12 +102,9 @@ valuation using closed-form functions and the time value of money.\\
 %from functions entirely. Because of the mathematical nature of finance, a functional
 %programming language is preferable and makes it easier to write and test mathematical expressions.\\
 
-Functional languages lend themselves well to the domain of finance due
-to several reasons, one being modularity as described in \cite{hughes:matters-cj}.
-Moreover, Haskell is a pure language meaning that a function will always return the same value
-if given the same input. This makes it ideal for
-financial computations where we want to be certain our computations are not changed by some
-global state.\\
+Functional languages lend themselves well to the domain of finance for
+several reasons such as modularity\cite{hughes:matters-cj} and laziness
+\cite{composingcontracts}[Section 5.3].\\
 
 %An example could be that we wish to compute the yield of a set of bonds
 %over the two coming years, given that the bonds reach maturity in ten years.
@@ -117,15 +115,16 @@ global state.\\
 %% More technical details
 %As part of the input to the project, we have access to existing test-cases written in Mathematica code.
 %These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
-Another benefit of using Haskell is its type system which can help ensure that our code is safe.\ab{More about type system I guess.}
+Another benefit of using Haskell is its type system which can help ensure that our code is safe.
+The type class system allows us to define interfaces for operations on financial products
+, the latter being represented by data types:\\
 
-We will now exemplify our use of Haskell's type system in modelling financial contracts.
-As a starting point we describe the functionality we wish to have when we modelling
-any financial instrument. Two examples could be that we wish to price a given
-product, or that we wish to compute the cashflow that the product will yield
-over a given period of time.
-
-Haskell's type classes can be used to define interfaces for our financial products:
+%We will now exemplify our use of Haskell's type system in modelling financial contracts.
+%As a starting point we describe the functionality we wish to have when we modelling
+%any financial instrument. Two examples could be that we wish to price a given
+%product, or that we wish to compute the cashflow that the product will yield
+%over a given period of time.
+%Haskell's type classes can be used to define interfaces for our financial products:
 
 \begin{center}
 \tt
@@ -153,12 +152,9 @@ data & Zero = Zero \{\\
 \end{tabular}
 \end{center}
 
-As a {\tt Zero} (zero coupon bond) is indeed a finanicial instrument we may make it an instance of
-the {\tt Instrument} class and define its functions based on appropriate mathematical
-formulas.
-
-Haskell's type hierarchy allows us to define a new type class that more precisely
-defines the desired interface for bonds:
+As a {\tt Zero} (zero coupon bond) is a finanicial instrument we may make it an instance of
+the {\tt Instrument} class and implement the required functions.
+Haskell classes can also be constrained in a natural manner:\\
 
 \begin{center}
 \tt
@@ -175,26 +171,22 @@ class & Instrument b => Bond b where\\
 We may continue to define new classes in this manner, forming a tree-like
 structure of the classes. We seek to identify these inheritance relations among
 financial products and model them in Haskell through the class system.
-Haskell's type system ensures us that we will never use an incorrect
-function to price a given financial product.\\
 
-Furthermore, we can use Haskell's data types to build new financial products, for instance
-a consol bond could be defined using our {\tt Zero} from above:
+Furthermore, we can use Haskell's algebraic data types to build new financial products, for instance
+a consol bond could be defined as:
 
 \begin{center}
 \tt
 \begin{tabular}{lll}
 data & Consol = Consol \{\\
       &\hspace{-1cm} baseBond    :: Zero,\\
-      &\hspace{-1cm} rate        :: Date,\\
+      &\hspace{-1cm} rate        :: Double,\\
       &\hspace{-1cm} settlements :: Int\\
       &\hspace{-0.8cm}\}
 \end{tabular}
 \end{center}
 
-which we also make an instance of both {\tt Instrument} and {\tt Bond}.
-As we see, the nature of bond types can be modelled using Haskell's algebraic
-data types to enable new products to be created with ease.\\
+which we also make an instance of both {\tt Instrument} and {\tt Bond}.\\
 
 Finally, functional languages can also easily preserve the inherent parallelism 
 of computations making them ideal for performance-critical tasks such as pricing

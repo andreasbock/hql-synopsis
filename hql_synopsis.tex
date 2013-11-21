@@ -60,17 +60,7 @@ Our everyday lives becoming increasingly dependent on IT, and as a result, softw
 errors are manifold. The financial sector has a particular low tolerance, as erroneous
 software may have dire consequences in the form of massive monetary loss. A language
 that, by design, allows us to discover a large portion of software errors in 
-the compilation phase is therefore preferable in the financial domain. 
-
-%Human brokers are replaced by computer systems, and traders are now joined by
-%colocated machines that perform high-frequency trading using predefined and backtested algorithms.\\
-
-\begin{comment}
-Backtesting is a method where historical data is used to evaluate the
-performance of said trading algorithm. However, an otherwise feasible trading
-model could wreak havoc on markets because of a software error, which stresses
-the need for code correctness for both the algorithms and our assesment of them.\\
-\end{comment}
+the compilation phase is therefore preferable in the financial domain.\\
 
 Our project will deliver a proof of concept library for pricing standard financial contracts.
 We will implement it using the pure functional programming language Haskell which features
@@ -101,8 +91,10 @@ The project is conducted within the HIPERFIT research center.
 In finance, a portfolio is a number of positions such as long or short trades in equities, bonds and other
 types of financial instruments. The present value of such a collection can be computed through
 discounting to reflect the theoretical value they would have if they existed today, allowing
-for comparisons of cashflows. Financial instruments are priced differently, some using closed-form functions and
-others relying on stochastic simulation. In this project, we will focus on bond
+for comparisons of cashflows. 
+%Financial instruments are priced differently, some using closed-form functions and
+%others relying on simulation. 
+In this project, we will focus on bond
 valuation using closed-form functions and the time value of money.\\
 
 %. Firstly, functions are first-class citizens, and programs are constructed
@@ -110,8 +102,8 @@ valuation using closed-form functions and the time value of money.\\
 %programming language is preferable and makes it easier to write and test mathematical expressions.\\
 
 Functional languages lend themselves well to the domain of finance due
-to several reasons, one being modularity as described in \cite{hughes:matters-cj}.Moreover,
-Haskell is a pure language meaning that a function will always return the same value
+to several reasons, one being modularity as described in \cite{hughes:matters-cj}.
+Moreover, Haskell is a pure language meaning that a function will always return the same value
 if given the same input. This makes it ideal for
 financial computations where we want to be certain our computations are not changed by some
 global state.\\
@@ -125,7 +117,7 @@ global state.\\
 %% More technical details
 %As part of the input to the project, we have access to existing test-cases written in Mathematica code.
 %These will be ported to QuickCheck \cite{QuickCheck}, which is a combinator library for generating test cases in Haskell.
-Haskell's type system can also help ensure that our code is safe.\ab{Intro to the type system}\\
+Another benefit of using Haskell is its type system which can help ensure that our code is safe.\ab{More about type system I guess.}
 
 We will now exemplify our use of Haskell's type system in modelling financial contracts.
 As a starting point we describe the functionality we wish to have when we modelling
